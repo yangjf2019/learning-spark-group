@@ -1,14 +1,9 @@
 # ignore files and dir  spark
 .idea/*
-bin/*
-data/*
+private/*
+output/*
 META-INF/*
-out/*
 target/*
-hdfs/*
-bak/*
-dbcheck/*
 *.iml
 src/test/*
 .gitignore_*
-projects/*
