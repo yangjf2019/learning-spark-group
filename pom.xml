@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.acewill</groupId>
+    <artifactId>learning-spark-group</artifactId>
+    <version>1.0.0</version>
+
+    <!--  ====================================================================  -->
+    <!--  ===============             Properties 信息           ===============  -->
+    <!--  ====================================================================  -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- jvm options -->
+        <PermGen>256m</PermGen>
+        <MaxPermGen>2048m</MaxPermGen>
+        <CodeCacheSize>1024m</CodeCacheSize>
+        <!--add  maven release-->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <encoding>UTF-8</encoding>
+        <!--maven-scala-plugin-->
+        <maven.scala.plugin>2.11</maven.scala.plugin>
+        <maven.build.scala.version>2.15.2</maven.build.scala.version>
+        <!--jvm version-->
+        <jvm.version>1.8</jvm.version>
+        <!-- scala -->
+        <scala.version>2.11.8</scala.version>
+        <!-- assert scala -->
+        <scala.test.version>3.0.2</scala.test.version>
+        <!-- scala style-->
+        <scala.stayle.version>0.8.0</scala.stayle.version>
+        <!-- spark -->
+        <cdh.spark.version>2.4.0-cdh6.3.0</cdh.spark.version>
+        <!-- hive -->
+        <cdh.hive.version>2.1.1-cdh6.3.0</cdh.hive.version>
+        <!-- hadoop -->
+        <cdh.hadoop.version>3.0.0-cdh6.3.0</cdh.hadoop.version>
+
+
+    </properties>
+    <repositories>
+        <!--  ====================================================================  -->
+        <!--  =============== 配置依赖库地址（用于加载依赖的jar包）       ===============  -->
+        <!--  ====================================================================  -->
+        <repository>
+            <id>vdc</id>
+            <url>http://nexus.saas.hand-china.com/content/repositories</url>
+        </repository>
+        <repository>
+            <id>horton-works-releases</id>
+            <url>http://repo.hortonworks.com/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>mvn repository</id>
+            <url>https://mvnrepository.com/artifact/</url>
+        </repository>
+        <repository>
+            <id>CDH</id>
+            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+        </repository>
+        <repository>
+            <id>scalastyle</id>
+            <url>https://repo1.maven.org/maven2</url>
+        </repository>
+    </repositories>
+    <!-- =================================================================== -->
+    <!-- ===================== Project dependencies ======================== -->
+    <!-- =================================================================== -->
+    <dependencies>
+        <!--  ====================================================================  -->
+        <!--  ===============        引入对应版本的 scalatest包            ==========  -->
+        <!--  ====================================================================  -->
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_2.11</artifactId>
+            <version>${scala.test.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--  ====================================================================  -->
+        <!--  ===============        引入对应版本的spark的local运行时的本地库包     ====  -->
+        <!--  ====================================================================  -->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.11</artifactId>
+            <version>${cdh.spark.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.11</artifactId>
+            <version>${cdh.spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-hive_2.11</artifactId>
+            <version>${cdh.spark.version}</version>
+        </dependency>
+        <!--  ====================================================================  -->
+        <!--  ===============        引入对应版本的 hive 包                ==========  -->
+        <!--  ====================================================================  -->
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-common</artifactId>
+            <version>${cdh.hive.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-service</artifactId>
+            <version>${cdh.hive.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-jdbc</artifactId>
+            <version>${cdh.hive.version}</version>
+        </dependency>
+        <!--  ====================================================================  -->
+        <!--  ===============        引入对应版本的 hadoop 包              ==========  -->
+        <!--  ====================================================================  -->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>${cdh.hadoop.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+            <version>${cdh.hadoop.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-mapreduce-client-core</artifactId>
+            <version>${cdh.hadoop.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <!--  ====================================================================  -->
+    <!--  ===============              maven打包                ===============  -->
+    <!--  ====================================================================  -->
+    <build>
+        <finalName>learning-spark-group</finalName>
+        <sourceDirectory>src/main/scala</sourceDirectory>
+        <!--<testSourceDirectory>src/test/scala</testSourceDirectory>-->
+        <outputDirectory>target/scala-${scala.version}/classes</outputDirectory>
+        <testOutputDirectory>target/scala-${scala.version}/test-classes</testOutputDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <version>${maven.build.scala.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <scalaVersion>${scala.version}</scalaVersion>
+                    <recompileMode>incremental</recompileMode>
+                    <args>
+                        <arg>-unchecked</arg>
+                        <arg>-deprecation</arg>
+                        <arg>-feature</arg>
+                        <arg>-target:jvm-${jvm.version}</arg>
+                    </args>
+                    <jvmArgs>
+                        <jvmArg>-XX:MetaspaceSize=${PermGen}</jvmArg>
+                        <jvmArg>-XX:MaxMetaspaceSize=${MaxPermGen}</jvmArg>
+                        <jvmArg>-XX:ReservedCodeCacheSize=${CodeCacheSize}</jvmArg>
+                    </jvmArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.scalastyle</groupId>
+                <artifactId>scalastyle-maven-plugin</artifactId>
+                <version>${scala.stayle.version}</version>
+                <configuration>
+                    <verbose>false</verbose>
+                    <failOnViolation>true</failOnViolation>
+                    <includeTestSourceDirectory>false</includeTestSourceDirectory>
+                    <failOnWarning>false</failOnWarning>
+                    <sourceDirectory>${basedir}/src/main/scala</sourceDirectory>
+                    <testSourceDirectory>${basedir}/src/test/scala</testSourceDirectory>
+                    <configLocation>scalastyle-config.xml</configLocation>
+                    <outputFile>${basedir}/target/scalastyle-output.xml</outputFile>
+                    <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+                    <outputEncoding>${project.reporting.outputEncoding}</outputEncoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--<plugin>-->
+            <!--<artifactId>maven-assembly-plugin</artifactId>-->
+            <!--<configuration>-->
+            <!--<descriptorRefs>-->
+            <!--<descriptorRef>jar-with-dependencies</descriptorRef>-->
+            <!--</descriptorRefs>-->
+            <!--<archive>-->
+            <!--<manifest>-->
+            <!--<mainClass></mainClass>-->
+            <!--</manifest>-->
+            <!--</archive>-->
+            <!--</configuration>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>make-assembly</id>-->
+            <!--<phase>package</phase>-->
+            <!--<goals>-->
+            <!--<goal>single</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+        </plugins>
+    </build>
+</project>

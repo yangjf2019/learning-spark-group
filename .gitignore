@@ -1,0 +1,14 @@
+# ignore files and dir  spark
+.idea/*
+bin/*
+data/*
+META-INF/*
+out/*
+target/*
+hdfs/*
+bak/*
+dbcheck/*
+*.iml
+src/test/*
+.gitignore_*
+projects/*
