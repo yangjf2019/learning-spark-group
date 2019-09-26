@@ -36,7 +36,7 @@
         <!-- spark -->
         <cdh.spark.version>2.4.0-cdh6.3.0</cdh.spark.version>
         <!-- hive -->
-        <cdh.hive.version>2.1.1-cdh6.3.0</cdh.hive.version>
+        <cdh.hive.version>3.1.2</cdh.hive.version>
         <!-- hadoop -->
         <cdh.hadoop.version>3.0.0-cdh6.3.0</cdh.hadoop.version>
 
