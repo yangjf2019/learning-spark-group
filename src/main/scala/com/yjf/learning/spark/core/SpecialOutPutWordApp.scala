@@ -1,5 +1,5 @@
 package com.yjf.learning.spark.core
-import com.yjf.learning.commom.format.RDDSpecialTextOutputFormat
+import com.yjf.learning.common.format.RDDSpecialTextOutputFormat
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**

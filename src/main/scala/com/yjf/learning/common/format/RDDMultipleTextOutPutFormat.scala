@@ -1,5 +1,5 @@
-package com.yjf.learning.commom.format
-import com.yjf.learning.commom.utils.LearningDateUtils
+package com.yjf.learning.common.format
+import com.yjf.learning.common.utils.LearningDateUtils
 import org.apache.hadoop.io.NullWritable
 import org.apache.hadoop.mapred.lib.MultipleTextOutputFormat
 

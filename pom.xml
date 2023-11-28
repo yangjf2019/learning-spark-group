@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.acewill</groupId>
+    <groupId>com.yjf</groupId>
     <artifactId>learning-spark-group</artifactId>
     <version>1.0.0</version>
 
@@ -14,31 +14,25 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <!-- jvm options -->
-        <PermGen>256m</PermGen>
-        <MaxPermGen>2048m</MaxPermGen>
-        <CodeCacheSize>1024m</CodeCacheSize>
         <!--add  maven release-->
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <encoding>UTF-8</encoding>
         <!--maven-scala-plugin-->
-        <maven.scala.plugin>2.11</maven.scala.plugin>
+        <maven.scala.plugin>2.12</maven.scala.plugin>
         <maven.build.scala.version>2.15.2</maven.build.scala.version>
         <!--jvm version-->
-        <jvm.version>1.8</jvm.version>
+        <jvm.version>11</jvm.version>
         <!-- scala -->
-        <scala.version>2.11.8</scala.version>
+        <scala.version>2.12.17</scala.version>
         <!-- assert scala -->
-        <scala.test.version>3.0.2</scala.test.version>
+        <scala.test.version>3.2.8</scala.test.version>
         <!-- scala style-->
-        <scala.stayle.version>0.8.0</scala.stayle.version>
+        <scala.stayle.version>1.0.0</scala.stayle.version>
         <!-- spark -->
-        <cdh.spark.version>2.4.0-cdh6.3.0</cdh.spark.version>
-        <!-- hive -->
-        <cdh.hive.version>3.1.2</cdh.hive.version>
+        <apache.spark.version>3.1.1</apache.spark.version>
         <!-- hadoop -->
-        <cdh.hadoop.version>3.0.0-cdh6.3.0</cdh.hadoop.version>
+        <apache.hadoop.version>3.1.0</apache.hadoop.version>
 
 
     </properties>
@@ -59,10 +53,6 @@
             <url>https://mvnrepository.com/artifact/</url>
         </repository>
         <repository>
-            <id>CDH</id>
-            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
-        </repository>
-        <repository>
             <id>scalastyle</id>
             <url>https://repo1.maven.org/maven2</url>
         </repository>
@@ -76,7 +66,7 @@
         <!--  ====================================================================  -->
         <dependency>
             <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_2.11</artifactId>
+            <artifactId>scalatest_2.12</artifactId>
             <version>${scala.test.version}</version>
             <scope>test</scope>
         </dependency>
@@ -86,54 +76,32 @@
         <!--  ====================================================================  -->
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_2.11</artifactId>
-            <version>${cdh.spark.version}</version>
+            <artifactId>spark-core_2.12</artifactId>
+            <version>${apache.spark.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_2.11</artifactId>
-            <version>${cdh.spark.version}</version>
+            <artifactId>spark-sql_2.12</artifactId>
+            <version>${apache.spark.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-hive_2.11</artifactId>
-            <version>${cdh.spark.version}</version>
-        </dependency>
-        <!--  ====================================================================  -->
-        <!--  ===============        引入对应版本的 hive 包                ==========  -->
-        <!--  ====================================================================  -->
-        <dependency>
-            <groupId>org.apache.hive</groupId>
-            <artifactId>hive-common</artifactId>
-            <version>${cdh.hive.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hive</groupId>
-            <artifactId>hive-service</artifactId>
-            <version>${cdh.hive.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hive</groupId>
-            <artifactId>hive-jdbc</artifactId>
-            <version>${cdh.hive.version}</version>
-        </dependency>
+
         <!--  ====================================================================  -->
         <!--  ===============        引入对应版本的 hadoop 包              ==========  -->
         <!--  ====================================================================  -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
-            <version>${cdh.hadoop.version}</version>
+            <version>${apache.hadoop.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
-            <version>${cdh.hadoop.version}</version>
+            <version>${apache.hadoop.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-mapreduce-client-core</artifactId>
-            <version>${cdh.hadoop.version}</version>
+            <version>${apache.hadoop.version}</version>
         </dependency>
 
     </dependencies>
@@ -144,7 +112,6 @@
     <build>
         <finalName>learning-spark-group</finalName>
         <sourceDirectory>src/main/scala</sourceDirectory>
-        <!--<testSourceDirectory>src/test/scala</testSourceDirectory>-->
         <outputDirectory>target/scala-${scala.version}/classes</outputDirectory>
         <testOutputDirectory>target/scala-${scala.version}/test-classes</testOutputDirectory>
         <plugins>
@@ -169,11 +136,6 @@
                         <arg>-feature</arg>
                         <arg>-target:jvm-${jvm.version}</arg>
                     </args>
-                    <jvmArgs>
-                        <jvmArg>-XX:MetaspaceSize=${PermGen}</jvmArg>
-                        <jvmArg>-XX:MaxMetaspaceSize=${MaxPermGen}</jvmArg>
-                        <jvmArg>-XX:ReservedCodeCacheSize=${CodeCacheSize}</jvmArg>
-                    </jvmArgs>
                 </configuration>
             </plugin>
             <plugin>
@@ -200,28 +162,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--<plugin>-->
-            <!--<artifactId>maven-assembly-plugin</artifactId>-->
-            <!--<configuration>-->
-            <!--<descriptorRefs>-->
-            <!--<descriptorRef>jar-with-dependencies</descriptorRef>-->
-            <!--</descriptorRefs>-->
-            <!--<archive>-->
-            <!--<manifest>-->
-            <!--<mainClass></mainClass>-->
-            <!--</manifest>-->
-            <!--</archive>-->
-            <!--</configuration>-->
-            <!--<executions>-->
-            <!--<execution>-->
-            <!--<id>make-assembly</id>-->
-            <!--<phase>package</phase>-->
-            <!--<goals>-->
-            <!--<goal>single</goal>-->
-            <!--</goals>-->
-            <!--</execution>-->
-            <!--</executions>-->
-            <!--</plugin>-->
         </plugins>
     </build>
 </project>

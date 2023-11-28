@@ -1,4 +1,4 @@
-package com.yjf.learning.commom.utils
+package com.yjf.learning.common.utils
 import java.text.SimpleDateFormat
 import java.util.{Calendar, Date}
 
